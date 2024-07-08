@@ -3,6 +3,7 @@ using MagazineWebApi.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagazineWebApi.DataAccess.Migrations
 {
     [DbContext(typeof(WarehouseStorageContext))]
-    partial class WarehouseStorageContextModelSnapshot : ModelSnapshot
+    [Migration("20240708141358_AddWholesale")]
+    partial class AddWholesale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,29 +39,6 @@ namespace MagazineWebApi.DataAccess.Migrations
                     b.ToTable("InvoiceMedicine");
                 });
 
-            modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Employee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employees");
-                });
-
             modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Invoice", b =>
                 {
                     b.Property<int>("Id")
@@ -67,20 +47,10 @@ namespace MagazineWebApi.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
-                    b.Property<int>("WholesaleId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.HasIndex("WholesaleId");
 
                     b.ToTable("Invoices");
                 });
@@ -116,24 +86,6 @@ namespace MagazineWebApi.DataAccess.Migrations
                     b.ToTable("Medicines");
                 });
 
-            modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Wholesale", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Wholesales");
-                });
-
             modelBuilder.Entity("InvoiceMedicine", b =>
                 {
                     b.HasOne("MagazineWebApi.DataAccess.Entities.Invoice", null)
@@ -147,35 +99,6 @@ namespace MagazineWebApi.DataAccess.Migrations
                         .HasForeignKey("MedicinesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Invoice", b =>
-                {
-                    b.HasOne("MagazineWebApi.DataAccess.Entities.Employee", "Employee")
-                        .WithMany("Invoices")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MagazineWebApi.DataAccess.Entities.Wholesale", "Wholesale")
-                        .WithMany("Invoices")
-                        .HasForeignKey("WholesaleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-
-                    b.Navigation("Wholesale");
-                });
-
-            modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Employee", b =>
-                {
-                    b.Navigation("Invoices");
-                });
-
-            modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Wholesale", b =>
-                {
-                    b.Navigation("Invoices");
                 });
 #pragma warning restore 612, 618
         }

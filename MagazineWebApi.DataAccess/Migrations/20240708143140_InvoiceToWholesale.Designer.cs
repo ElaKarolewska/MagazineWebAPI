@@ -3,6 +3,7 @@ using MagazineWebApi.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MagazineWebApi.DataAccess.Migrations
 {
     [DbContext(typeof(WarehouseStorageContext))]
-    partial class WarehouseStorageContextModelSnapshot : ModelSnapshot
+    [Migration("20240708143140_InvoiceToWholesale")]
+    partial class InvoiceToWholesale
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,9 +70,6 @@ namespace MagazineWebApi.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Number")
                         .HasColumnType("int");
 
@@ -77,8 +77,6 @@ namespace MagazineWebApi.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
 
                     b.HasIndex("WholesaleId");
 
@@ -151,26 +149,13 @@ namespace MagazineWebApi.DataAccess.Migrations
 
             modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Invoice", b =>
                 {
-                    b.HasOne("MagazineWebApi.DataAccess.Entities.Employee", "Employee")
-                        .WithMany("Invoices")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MagazineWebApi.DataAccess.Entities.Wholesale", "Wholesale")
                         .WithMany("Invoices")
                         .HasForeignKey("WholesaleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Employee");
-
                     b.Navigation("Wholesale");
-                });
-
-            modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Employee", b =>
-                {
-                    b.Navigation("Invoices");
                 });
 
             modelBuilder.Entity("MagazineWebApi.DataAccess.Entities.Wholesale", b =>

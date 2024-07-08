@@ -1,6 +1,4 @@
-﻿
-
-using MagazineWebApi.DataAccess.Entities;
+﻿using MagazineWebApi.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MagazineWebApi.DataAccess
@@ -11,5 +9,8 @@ namespace MagazineWebApi.DataAccess
         {
         }
         public DbSet<Medicine>Medicines { get; set; }
+        public DbSet<Invoice>Invoices { get; set; }
+        public DbSet<Wholesale> Wholesales { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }
