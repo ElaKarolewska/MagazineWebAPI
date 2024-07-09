@@ -9,7 +9,7 @@ namespace MagazineWebApi.DataAccess.Entities
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
         
-        public int Number { get; set; }
+        public string Number { get; set; }
 
         public List<Medicine> Medicines { get; set; }
     }
