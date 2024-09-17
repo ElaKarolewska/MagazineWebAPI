@@ -1,4 +1,5 @@
 using MagazineWebApi.ApplicationServices.API.Domain;
+using MagazineWebApi.ApplicationServices.Mappings;
 using MagazineWebApi.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssembly(typeof(ResponseBase<>).Assembly));
-
+builder.Services.AddAutoMapper(typeof(MedicinesProfile).Assembly);
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
 builder.Services.AddDbContext<WarehouseStorageContext>(opt =>
        opt.UseSqlServer(builder.Configuration.GetConnectionString("WarehouseDatabaseConnection")));
 

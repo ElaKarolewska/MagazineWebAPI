@@ -13,9 +13,9 @@ namespace MagazineWebApi.ApplicationServices.API.Handlers
         {
             this.invoiceRepository = invoiceRepository;
         }
-        public Task<GetInvoicesResponse> Handle(GetInvoicesRequest request, CancellationToken cancellationToken)
+        public async Task<GetInvoicesResponse> Handle(GetInvoicesRequest request, CancellationToken cancellationToken)
         {
-            var invoice = this.invoiceRepository.GetAll();
+            var invoice = await this.invoiceRepository.GetAll();
             var domainInvoice = invoice.Select(x => new Domain.Models.Invoice()
             {
                 Id = x.Id,
@@ -27,7 +27,7 @@ namespace MagazineWebApi.ApplicationServices.API.Handlers
                 Data = domainInvoice.ToList(),
             };
 
-            return Task.FromResult(response);
+            return response;
         }
     }
 }
