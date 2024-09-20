@@ -1,32 +1,32 @@
-﻿using MagazineWebApi.ApplicationServices.API.Domain;
+﻿using AutoMapper;
+using MagazineWebApi.ApplicationServices.API.Domain;
 using MagazineWebApi.DataAccess;
-using MagazineWebApi.DataAccess.Entities;
+using MagazineWebApi.DataAccess.CQRS;
+using MagazineWebApi.DataAccess.CQRS.Queries;
 using MediatR;
+
 
 namespace MagazineWebApi.ApplicationServices.API.Handlers
 {
     public class GetInvoicesHandler : IRequestHandler<GetInvoicesRequest, GetInvoicesResponse>
     {
-        private readonly IRepository<Invoice> invoiceRepository;
+        private readonly IMapper mapper;
+        private readonly IQueryExecutor queryExecutor;
 
-        public GetInvoicesHandler(IRepository<DataAccess.Entities.Invoice> invoiceRepository)
+        public GetInvoicesHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.invoiceRepository = invoiceRepository;
+            this .mapper = mapper;
+            this .queryExecutor = queryExecutor;
         }
         public async Task<GetInvoicesResponse> Handle(GetInvoicesRequest request, CancellationToken cancellationToken)
         {
-            var invoice = await this.invoiceRepository.GetAll();
-            var domainInvoice = invoice.Select(x => new Domain.Models.Invoice()
-            {
-                Id = x.Id,
-                Number = x.Number,
-            });
-            
+            var query = new GetInvoicesQuery();
+            var invoices = await this.queryExecutor.Execute(query);
+            var mappedInvoice = this.mapper.Map<List<Domain.Models.Invoice>>(invoices);
             var response = new GetInvoicesResponse()
             {
-                Data = domainInvoice.ToList(),
+                Data = mappedInvoice,
             };
-
             return response;
         }
     }

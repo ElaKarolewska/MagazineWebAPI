@@ -1,8 +1,6 @@
-﻿
+﻿using MagazineWebApi.DataAccess.CQRS.Queries;
 
-using MagazineWebApi.DataAccess.CQRS.Queries;
-
-namespace MagazineWebApi.DataAccess
+namespace MagazineWebApi.DataAccess.CQRS
 {
     public class QueryExecutor : IQueryExecutor
     {
@@ -13,7 +11,7 @@ namespace MagazineWebApi.DataAccess
         }
         public Task<TResult> Execute<TResult>(QueryBase<TResult> query)
         {
-            return query.Execute(this.context);
+            return query.Execute(context);
         }
     }
 }
