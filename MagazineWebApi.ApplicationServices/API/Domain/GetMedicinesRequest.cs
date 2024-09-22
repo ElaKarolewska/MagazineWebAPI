@@ -1,9 +1,8 @@
-﻿
-using MediatR;
+﻿using MediatR;
 
 namespace MagazineWebApi.ApplicationServices.API.Domain
 {
-    public class GetMedicinesRequest: IRequest<GetMedicinesResponse>
+    public class GetMedicinesRequest : IRequest<GetMedicinesResponse>
     {
     }
 }

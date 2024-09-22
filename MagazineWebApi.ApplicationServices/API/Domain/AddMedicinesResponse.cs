@@ -2,7 +2,7 @@
 
 namespace MagazineWebApi.ApplicationServices.API.Domain
 {
-    public class GetMedicinesResponse : ResponseBase<List<Medicine>>
+    public class AddMedicinesResponse: ResponseBase<Medicine>
     {
     }
 }

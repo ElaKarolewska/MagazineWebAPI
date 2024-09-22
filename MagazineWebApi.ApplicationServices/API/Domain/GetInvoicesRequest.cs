@@ -1,9 +1,8 @@
-﻿
-using MediatR;
+﻿using MediatR;
 
 namespace MagazineWebApi.ApplicationServices.API.Domain
 {
-    public class GetInvoicesRequest: IRequest<GetInvoicesResponse>
+    public class GetInvoicesRequest : IRequest<GetInvoicesResponse>
     {
     }
 }

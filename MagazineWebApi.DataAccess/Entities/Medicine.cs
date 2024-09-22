@@ -18,8 +18,13 @@ namespace MagazineWebApi.DataAccess.Entities
         [Required]
         [MaxLength(100)]
         public string? PackSize { get; set; }
-        
+
+        [Required]
         public double Price { get; set; }
+        [Required]
+        public string Series { get; set; }
+        [Required]
+        public string ExpirationDate { get; set; }
 
     }
 }

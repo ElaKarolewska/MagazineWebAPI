@@ -10,8 +10,6 @@ namespace MagazineWebAPI.Controllers
     [Route("[controller]")]
     public class MedicinesController : ControllerBase
     {
-
-        
             private readonly IMediator mediator;
             public MedicinesController(IMediator mediator)
             {
@@ -25,9 +23,16 @@ namespace MagazineWebAPI.Controllers
                 var response = await this.mediator.Send(request);
                 return this.Ok(response);
             }
-        
 
-         //private readonly IRepository<Medicine> medicineRepository;
+            [HttpPost]
+            [Route("")]
+            public async Task<IActionResult> AddMedicine([FromBody] AddMedicinesRequest request)
+            {
+               var response = await this.mediator.Send(request);
+               return this.Ok(response);
+            }
+
+        //private readonly IRepository<Medicine> medicineRepository;
         //public MedicinesController(IRepository<Medicine> medicineRepository)
         //{
         //    this.medicineRepository = medicineRepository;
