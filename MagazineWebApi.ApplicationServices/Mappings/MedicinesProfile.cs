@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using MagazineWebApi.ApplicationServices.API.Domain;
 using MagazineWebApi.ApplicationServices.API.Domain.Models;
 
 namespace MagazineWebApi.ApplicationServices.Mappings
@@ -14,6 +15,8 @@ namespace MagazineWebApi.ApplicationServices.Mappings
                 .ForMember(x => x.Dose, y => y.MapFrom(z => z.Dose))
                 .ForMember(x => x.ExpirationDate, y => y.MapFrom(z => z.ExpirationDate))
                 .ForMember(x => x.Series, y => y.MapFrom(z => z.Series));
+
+
         }
     }
 }
