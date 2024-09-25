@@ -1,7 +1,7 @@
-﻿using MagazineWebApi.ApplicationServices.API.Domain;
+﻿using MagazineWebApi.ApplicationServices.API.Domain.Add;
+using MagazineWebApi.ApplicationServices.API.Domain.Get;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 
 namespace MagazineWebAPI.Controllers
 {
@@ -22,6 +22,15 @@ namespace MagazineWebAPI.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> AddInvoice([FromBody] AddInvoiceRequest request)
+        {
+            var response = await mediator.Send(request);
+            return this.Ok(response);
+        }
     }
+
     
 }

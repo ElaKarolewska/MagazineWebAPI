@@ -1,7 +1,7 @@
 ﻿
 
 using AutoMapper;
-using MagazineWebApi.ApplicationServices.API.Domain;
+using MagazineWebApi.ApplicationServices.API.Domain.Get;
 using MagazineWebApi.DataAccess.CQRS;
 using MagazineWebApi.DataAccess.CQRS.Queries;
 using MediatR;
