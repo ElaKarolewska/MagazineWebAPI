@@ -7,11 +7,13 @@ namespace MagazineWebApi.DataAccess.CQRS.Queries
 {
     public class GetMedicinesQuery: QueryBase<List<Medicine>>
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
         public override Task<List<Medicine>> Execute(WarehouseStorageContext context)
         {
-            return context.Medicines.ToListAsync();
-          
+                return Name == null
+                ? context.Medicines.ToListAsync()
+                : context.Medicines.Where(x => x.Name == this.Name).ToListAsync();
+    
         }
     }
 }

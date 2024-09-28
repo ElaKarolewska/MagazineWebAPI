@@ -1,6 +1,4 @@
 ﻿using MagazineWebApi.ApplicationServices.API.Domain.Get;
-using MagazineWebApi.DataAccess;
-using MagazineWebApi.DataAccess.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
